@@ -278,7 +278,7 @@ remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "url": "ht
 
 }
 
-let ikyads = await getBuffer (`https://telegra.ph/file/af031ee491d3352d576c2.jpg)
+let ikyads = await getBuffer (`https://telegra.ph/file/af031ee491d3352d576c2.jpg`)
         let d = new Date
        let locale = 'id'
        let gmt = new Date(0).getTime() - new Date('1 January 1970').getTime()
@@ -1306,7 +1306,7 @@ ikyy.relayWAMessage(res)
 break
 
 
-case 'menu':
+case 'menu2':
               groups = ikyy.chats.array.filter(v => v.jid.endsWith('g.us'))
               privat = ikyy.chats.array.filter(v => v.jid.endsWith('s.whatsapp.net'))
               ram2 = `${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}MB / ${Math.round(require('os').totalmem / 1024 / 1024)}MB`
