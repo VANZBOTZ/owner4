@@ -5,10 +5,7 @@ const fs = require("fs-extra")
 
 const { getBuffer } = require('../lib/myfunc')
 const { color, bgcolor } = require('../lib/color')
-join = '\`\`\`New Member\`\`\` \n \`\`\`Nama :\`\`\` \n \`\`\`Askot : \`\`\` \n \`\`\`Umur :\`\`\` \n \`\`\`Status :\`\`\` \n\n - [   ] -'
-leave = '\`\`\`Sayonaraa\`\`\`'
-
-teks = `${join}`
+const moment = require("moment-timezone")
 let setting = JSON.parse(fs.readFileSync('./setting.json'))
 
 module.exports = welcome = async (ikyy, anu) => {
@@ -34,112 +31,44 @@ module.exports = welcome = async (ikyy, anu) => {
              if (anu.action == 'add' && !mem.includes(ikyy.user.jid)) {
              if (!welkom.includes(anu.jid)) return
                 mdata = await ikyy.groupMetadata(anu.jid)
-           
                 memeg = mdata.participants.length
-            	num = anu.participants[0]
+            	 num = anu.participants[0]
                 let v = ikyy.contacts[num] || { notify: num.replace(/@.+/, '') }
                 anu_user = v.vname || v.notify || num.split('@')[0]
-            buff = await getBuffer(`https://api.lolhuman.xyz/api/base/welcome?apikey=${setting.lolkey}&img1=${pp_user}&img2=${pp_grup}&background=https://telegra.ph/file/559d40a73f54e257b0b2e.jpg&username=${encodeURI(anu_user)}&member=${memeg}&groupname= ${encodeURI(mdata.subject)}`)
-        buttons = [
+                let p2 = await ikyy.getStatus(num)
+        let p3 = `${p2? `${p2.status}` : '-'}`
+        timuu = moment.tz('Asia/Jakarta').format('HH:mm:ss')
+                teks = `*Welcome @${num.split('@')[0]}* 
 
-          { buttonId: `!selamatdatang`, buttonText: { displayText: "Welcome👋" }, type: 1 },
+📛 : _${anu_user}_
+💌 : _${p3}_
+🔣 : _@${num.split('@')[0]}_
+🥉 : _${memeg} Member (s)_
+⏰ : _${timuu} Indonesian time_
 
-        ];
-
-        imageMsg = (
-
-          await ikyy.prepareMessageMedia(buff, "imageMessage", {
-
-            thumbnail: buff,
-
-          })
-
-        ).imageMessage;
-
-        buttonsMessage = {
-
-          contentText: `${teks}`,
-
-          footerText: "Botz~",
-
-          imageMessage: imageMsg,
-
-          buttons: buttons,
-
-          headerType: 4,
-
-        };
-
-        prep = await ikyy.prepareMessageFromContent(
-
-          mdata.id,
-
-          { buttonsMessage },
-
-          {}
-
-        );
-
-        ikyy.relayWAMessage(prep);
-
-      }
-
-      if (anu.action == "remove" && !mem.includes(ikyy.user.jid)) {
-
-        mdata = await ikyy.groupMetadata(anu.jid);
-
-        num = anu.participants[0];
-
-        let w = ikyy.contacts[num] || { notify: num.replace(/@.+/, "") };
-
-        anu_user = w.vname || w.notify || num.split("@")[0];
-
-        memeg = mdata.participants.length;
-
-        out = `${leave}`;
-
-        buff = await getBuffer(`https://api.lolhuman.xyz/api/base/welcome?apikey=${setting.lolkey}&img1=${pp_user}&img2=${pp_grup}&background=https://telegra.ph/file/559d40a73f54e257b0b2e.jpg&username=${encodeURI(anu_user)}&member=${memeg}&groupname= ${encodeURI(mdata.subject)}`)
-            
-        buttons = [
-
-          { buttonId: `!bay`, buttonText: { displayText: "Sayonara👋" }, type: 1 },];
-
-        imageMsg = (
-
-          await ikyy.prepareMessageMedia(buff, "imageMessage", {
-
-            thumbnail: buff,
-
-          })
-
-        ).imageMessage;
-
-        buttonsMessage = {
-
-          contentText: `${out}`,
-
-          footerText: "Botz~",
-
-          imageMessage: imageMsg,
-
-          buttons: buttons,
-
-          headerType: 4,
-
-        };
-
-        prep = await ikyy.prepareMessageFromContent(
-
-          mdata.id,
-
-          { buttonsMessage },
-
-          {}
-
-        );
-
-        ikyy.relayWAMessage(prep);
-        }
+\`\`\`Hope you like it and don't forget to read the group description\`\`\``;            
+                buff = await getBuffer(`https://ziy.herokuapp.com/api/author/welcome1?pp=${pp_user}&nama=${anu_user}&namagc=${encodeURI(mdata.subject)}&ppgc=${pp_grup}&bg=https://i.ibb.co/XjgQzkB/b1be492ada987df650bc831b1631815e.jpg&member=${mdata.participants.length}`)
+		        ikyy.sendMessage(mdata.id, buff, MessageType.image, {caption: teks, contextInfo: {"mentionedJid": [num]}})
+		}
+            if (anu.action == 'remove' && !mem.includes(ikyy.user.jid)) {
+            if (!welkom.includes(anu.jid)) return
+                mdata = await ikyy.groupMetadata(anu.jid)
+            	num = anu.participants[0]
+                let w = ikyy.contacts[num] || { notify: num.replace(/@.+/, '') }
+                anu_user = w.vname || w.notify || num.split('@')[0]
+                memeg = mdata.participants.length
+                let p2 = await ikyy.getStatus(num)
+        let p3 = `${p2? `${p2.status}` : '-'}`
+        timuu = moment.tz('Asia/Jakarta').format('HH:mm:ss')
+                out = `◪ Goodbye @${num.split('@')[0]}
+◪ Leave from group:
+${mdata.subject}
+│
+└─ ❏ Nomor: ${num.replace('@s.whatsapp.net', '')}
+GoodBye~~`;
+                buff = await getBuffer(`https://ziy.herokuapp.com/api/author/goodbye1?pp=${pp_user}&nama=${anu_user}&namagc=${encodeURI(mdata.subject)}&ppgc=${pp_grup}&bg=https://i.ibb.co/XjgQzkB/b1be492ada987df650bc831b1631815e.jpg&member=${mdata.participants.length}`)
+                ikyy.sendMessage(mdata.id, buff, MessageType.image, {caption: out, contextInfo: {"mentionedJid": [num]}})
+            }
 		} catch (e) {
 			console.log('Error : %s', color(e, 'red'))
 		}
