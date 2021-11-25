@@ -73,6 +73,10 @@ let fakeimage = fs.readFileSync("./media/wpmobile.png")
 let errorImg = 'https://i.ibb.co/FBm52Pt/1e0fe6a08b67.jpg'
 let setting = JSON.parse(fs.readFileSync('./setting.json'))
 
+ppbot = setting.ppbot
+gc = setting.gc
+don = setting.don
+hargaSewa = setting.hargaSewa
 owner = setting.owner
 gamewaktu = setting.gamewaktu
 faketoko = "KENZYBOTZ"
@@ -278,7 +282,7 @@ remoteJid: "status@broadcast" } : {}) }, message: { "imageMessage": { "url": "ht
 
 }
 
-let ikyads = await getBuffer (`https://telegra.ph/file/af031ee491d3352d576c2.jpg`)
+let ikyads = await getBuffer (`${setting.ppbot}`)
         let d = new Date
        let locale = 'id'
        let gmt = new Date(0).getTime() - new Date('1 January 1970').getTime()
@@ -907,7 +911,7 @@ buttons: buttons,
 ikyy.sendMessage(id, buttonMessages, MessageType.buttonsMessage, options)
 }
                  
-                   case 'menu':{    
+                   case 'menu3':{    
                    reply(`*MENAMPILKAN MENU...*`)         
                    let totalchat = await ikyy.chats.all()
                    let i = []
@@ -922,7 +926,7 @@ ikyy.sendMessage(id, buttonMessages, MessageType.buttonsMessage, options)
                 }
                 let timestampi = speed();
                 let latensii = speed() - timestampi
-                const { wa_version, mcc, mnc, os_version, device_manufacturer, device_model } = ikyy.user.phone
+                
                 let anu = process.uptime()
                             try {
                 var pic = await ikyy.getProfilePicture(`${sender.split('@')[0]}@c.us`)
@@ -1174,7 +1178,7 @@ Hai Kak👋 ${pushname}
 ┃▹  ${prefix}img2url *reply foto*
 ┃▹  ${prefix}ytsearch *query*
 ┗⬡
-┏⬡ 𝐋𝐈𝐒𝐓 𝐌𝐄𝐍𝐔
+┏⬡ 𝐋𝐈𝐒𝐓 𝐌𝐄??𝐔
 ┃▹  ${prefix}slot
 ┃▹  ${prefix}limitgame
 ┃▹  ${prefix}gelud @tag
@@ -1404,10 +1408,65 @@ ${petik}│◦➛ Owner : ${ownerName}
 
 © ›› ${ownerName} 
 `
-                    ikyy.sendMessage(from, { contentText: `${menu}`, footerText: `${wibu}`, buttons: [{ buttonId: `!command`, buttonText: { displayText: 'LIST MENU' }, type: 1 },{ buttonId: `!sewabot`, buttonText: { displayText: '🏷️ SEWA BOT' }, type: 1 },{ buttonId: `!owner`, buttonText: { displayText: '👥 OWNER' }, type: 1 } ], headerType: 'LOCATION', locationMessage: { degreesLatitude: '', degreesLongitude: '', jpegThumbnail: await getBuffer (pic), contextInfo: {mentionedJid: [sender]}}}, 'buttonsMessage')
+                    ikyy.sendMessage(from, { contentText: `${menu}`, footerText: `${wibu}`, buttons: [{ buttonId: `${prefix} command`, buttonText: { displayText: `⬡ LIST MENU\n\n_jika bot tidak merespon ketik ${prefix}command_` }, type: 1 },{ buttonId: `${prefix}allmenu`, buttonText: { displayText: `⬡ ALL MENU\n\n_jika bot tidak merespon ketik ${prefix}allmenu_` }, type: 1 },{ buttonId: `${prefix}sewabot`, buttonText: { displayText: `⬡ SEWA BOT\n\njika bot tidak merespon ketik ${prefix}sewabot_` }, type: 1 } ], headerType: 'LOCATION', locationMessage: { degreesLatitude: '', degreesLongitude: '', jpegThumbnail: ikyads, contextInfo: {mentionedJid: [sender]}}}, 'buttonsMessage')
                      break
 
+case 'menu': 
+              
+          thu = await ikyy.getStatus(`${sender.split('@')[0]}@s.whatsapp.net`, MessageType.text)
+              quotes = await fetchJson(`https://api.lolhuman.xyz/api/random/quotes?apikey=${setting.lolkey}`)
+                    quotes = quotes.result
+                    quotes = quotes.quote       
+              groups = ikyy.chats.array.filter(v => v.jid.endsWith('g.us'))
+              privat = ikyy.chats.array.filter(v => v.jid.endsWith('s.whatsapp.net'))
+              ram2 = `${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}MB / ${Math.round(require('os').totalmem / 1024 / 1024)}MB`
+              charger = `${charging ? 'lagi dicas' : 'ga dicas'}`
+              uptime = process.uptime();
+              timestampe = speed();
+              totalChat = await ikyy.chats.all()
+              latensie = speed() - timestampe
+              total = math(`${groups.length}*${privat.length}`)
+              
+              try {
+               var pic = await ikyy.getProfilePicture(`${sender.split('@')[0]}@c.us`)
+            } catch {
+                var pic = 'https://i.ibb.co/Tq7d7TZ/age-hananta-495-photo.png'
+            }
+              
+        menu =`  
+${ucapanWaktu} Kak ${pushname}
+      
+┌❏ *INDONESIA TIME*
+${petik}│◦➛ ${prefix}WIB : ${timuu}
+│◦➛ ${prefix}WITA : ${wita}
+└❏ WIT : ${wit}${petik}
+                          
+┌❏ *TODAY*
+${petik}│◦➛${ucapanWaktu}
+│◦➛Jam : ${timuu}
+└❏ Tanggal : ${date}${petik}
 
+┌❏ *DEVICE*
+${petik}│◦➛Whatsapp : ${ikyy.user.phone.wa_version}
+│◦➛Merk HP : ${device_manufacturer}
+│◦➛Versi HP : ${device_model}
+│◦➛Versi OS : ${os_version}
+│◦➛RAM : ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}MB / ${Math.round(require('os').totalmem / 1024 / 1024)}MB
+│◦➛MCC : ${mcc}
+└❏ MNC : ${mnc}${petik}
+
+┌─❑「 *BOT INFO* 」
+${petik}│◦➛ Owner :${ownerName}
+│◦➛Group Chats : ${groups.length}
+│◦➛𝐏𝐫𝐢𝐯𝐚𝐭𝐞 𝐂𝐡𝐚𝐭𝐬 : ${privat.length}
+│◦➛𝐁𝐚𝐭𝐞𝐫𝐚𝐢 : ${baterai}% ${charger}
+│◦➛𝐓𝐨𝐭𝐚𝐥 𝐂𝐡𝐚𝐭𝐬 : ${totalChat.length}
+│◦➛𝐀𝐜𝐭𝐢𝐯𝐞 : ${runtime(process.uptime())}
+│◦➛▢ 𝐏𝐥𝐚𝐭𝐟𝐨𝐫𝐦 : ${os.platform()}
+└❏ ${petik}`
+wibu = `${quotes}`
+           ikyy.sendMessage(from, { contentText: `${menu}`, footerText: `${wibu}`, buttons: [{ buttonId: `${prefix}command`, buttonText: { displayText: `⬡ LIST MENU\n\n_jika bot tidak merespon ketik ${prefix}command_` }, type: 1 },{ buttonId: `${prefix}sewabot`, buttonText: { displayText: `⬡ SEWA BOT\n\n_jika bot tidak merespon ketik ${prefix}sewabot_` }, type: 1 } ], headerType: 'LOCATION', locationMessage: { degreesLatitude: '', degreesLongitude: '', jpegThumbnail: ikyads, contextInfo: {mentionedJid: [sender]}}}, 'buttonsMessage')
+          break
 
                    // Random Text //
                 case 'quotes':
@@ -3134,7 +3193,7 @@ Ket : Ketik /resetgame , Untuk Mereset Permainan Yg Ada Di Grup!`, text, {contex
               gameAdd(sender, glimit)
               break
        case 'slot':
-              const sotoy = ['🍊 : 🍒 : 🍐','🍒 : ?? : 🍊','?? : 🍒 : 🍐','🍊 : 🍋 : 🔔','🔔 : 🍒 : 🍐','🔔 : 🍒 : 🍊','🍊 : 🍋 : 🔔','🍐 : 🍒 : 🍋','🍐 : 🍐 : 🍐','🍊 : 🍒 : 🍒','🔔 : 🔔 : 🍇','🍌 : 🍒 : 🔔','🍐 : 🔔 : 🔔','🍊 : 🍋 : 🍒','🍋 : 🍋 : 🍌','🔔 : 🔔 : 🍇','🔔 : 🍐 : 🍇','🔔 : 🔔 : 🔔','🍒 : 🍒 : 🍒','🍌 : 🍌 : 🍌','🍇 : ?? : 🍇']
+              const sotoy = ['🍊 : 🍒 : 🍐','🍒 : ?? : 🍊','?? : 🍒 : 🍐','🍊 : 🍋 : 🔔','🔔 : 🍒 : 🍐','🔔 : 🍒 : 🍊','?? : 🍋 : 🔔','🍐 : 🍒 : 🍋','🍐 : 🍐 : 🍐','🍊 : 🍒 : 🍒','🔔 : 🔔 : 🍇','🍌 : 🍒 : 🔔','🍐 : 🔔 : 🔔','🍊 : 🍋 : 🍒','🍋 : 🍋 : 🍌','🔔 : 🔔 : 🍇','🔔 : 🍐 : 🍇','🔔 : 🔔 : 🔔','🍒 : 🍒 : 🍒','🍌 : 🍌 : 🍌','🍇 : ?? : 🍇']
               somtoy = sotoy[Math.floor(Math.random() * (sotoy.length))]	
               somtoyy = sotoy[Math.floor(Math.random() * (sotoy.length))]	
               somtoyyy = sotoy[Math.floor(Math.random() * (sotoy.length))]	
@@ -3270,8 +3329,10 @@ Ket : Ketik /resetgame , Untuk Mereset Permainan Yg Ada Di Grup!`, text, {contex
        case 'buypremium':
        case 'sewabot':
        case 'iklan':
-      gopeynya = 'https://telegra.ph/file/af031ee491d3352d576c2.jpg'
-     teksnya = `ketik !owner`
+      gopeynya = `${setting.ppbot}`
+     teksnya = `1 minggu : 3.500
+     1 Bulan : 5.000
+     Permanen : 10.000`
 
               ikyy.sendMessage(from, await getBuffer(gopeynya), image, {quoted: mek, caption: teksnya })
               break
@@ -4518,7 +4579,7 @@ case 'chiisaihentai':
               buff = await getBuffer(`https://api.lolhuman.xyz/api/random/nsfw/${command}?apikey=IkyOgiwara`)
               buttons = [{buttonId: `${prefix + command}`,buttonText:{displayText: `➡️Next`},type:1}]
               imageMsg = (await ikyy.prepareMessageMedia(buff, "imageMessage", { thumbnail: buff, })).imageMessage
-              buttonsMessage = {footerText:'crated by ${ownerName}', imageMessage: imageMsg,
+              buttonsMessage = {footerText:`crated by ${ownerName}`, imageMessage: imageMsg,
               contentText:`Bot WhatsApp`,buttons,headerType:4}
               prep = await ikyy.prepareMessageFromContent(from,{buttonsMessage},{quoted: freply})
               ikyy.relayWAMessage(prep)
@@ -4570,7 +4631,7 @@ case 'chiisaihentai':
                buff = await getBuffer(`https://api.lolhuman.xyz/api/random2/${command}?apikey=${setting.lolkey}`)
                 buttons = [{buttonId: `${prefix + command}`,buttonText:{displayText: `➡️Next`},type:1}]
               imageMsg = (await ikyy.prepareMessageMedia(buff, "imageMessage", { thumbnail: buff, })).imageMessage
-              buttonsMessage = {footerText:'crated by ${ownerName}', imageMessage: imageMsg,
+              buttonsMessage = {footerText:`crated by ${ownerName}`, imageMessage: imageMsg,
               contentText:`Bot WhatsApp`,buttons,headerType:4}
               prep = await ikyy.prepareMessageFromContent(from,{buttonsMessage},{quoted: freply})
               ikyy.relayWAMessage(prep)
@@ -4585,14 +4646,14 @@ anu = await fetchJson(`https://leyscoders-api.herokuapp.com/api/ppcouple?apikey=
 						buff1 = await getBuffer(anu.result.male)
 						buttons = [{buttonId: `!infoig`,buttonText:{displayText: `Bot WhatsApp`},type:1}]
               imageMsg = (await ikyy.prepareMessageMedia(buff1, "imageMessage", { thumbnail: buff1, })).imageMessage
-              buttonsMessage = {footerText:'crated by ${ownerName}', imageMessage: imageMsg,
+              buttonsMessage = {footerText:`crated by ${ownerName}`, imageMessage: imageMsg,
               contentText:`Cowo`,buttons,headerType:4}
               prep = await ikyy.prepareMessageFromContent(from,{buttonsMessage},{quoted: freply})
               ikyy.relayWAMessage(prep)
             buff2 = await getBuffer(anu.result.female)
               buttons = [{buttonId: `!infoig`,buttonText:{displayText: `Bot WhatsApp`},type:1}]
               imageMsg = (await ikyy.prepareMessageMedia(buff2, "imageMessage", { thumbnail: buff2, })).imageMessage
-              buttonsMessage = {footerText:'crated by ${ownerName}', imageMessage: imageMsg,
+              buttonsMessage = {footerText:`crated by ${ownerName}`, imageMessage: imageMsg,
               contentText:`Cewe`,buttons,headerType:4}
               prep = await ikyy.prepareMessageFromContent(from,{buttonsMessage},{quoted: freply})
              setTimeout( async () => {
@@ -4607,7 +4668,7 @@ case 'memek':
 
 buttons = [{buttonId: `${prefix + command}`,buttonText:{displayText: `NEXT`},type:1}]
               imageMsg = (await ikyy.prepareMessageMedia(buff, "imageMessage", { thumbnail: buff, })).imageMessage
-              buttonsMessage = {footerText:'crated by ${ownerName}', imageMessage: imageMsg,
+              buttonsMessage = {footerText:`crated by ${ownerName}`, imageMessage: imageMsg,
               contentText:`klik Next untuk ke gambar selanjut nya`,buttons,headerType:4}
               prep = await ikyy.prepareMessageFromContent(from,{buttonsMessage},{quoted: freply})
               ikyy.relayWAMessage(prep)
@@ -4653,7 +4714,7 @@ break
                   buff = await getBuffer(`https://api.lolhuman.xyz/api/textprome/${command}?apikey=${setting.lolkey}&text=${ini_txt}`)
                  buttons = [{buttonId: `!menu`,buttonText:{displayText: `BACK MENU`},type:1}]
               imageMsg = (await ikyy.prepareMessageMedia(buff, "imageMessage", { thumbnail: buff, })).imageMessage
-              buttonsMessage = {footerText:'crated by ${ownerName}', imageMessage: imageMsg,
+              buttonsMessage = {footerText:`crated by ${ownerName}`, imageMessage: imageMsg,
               contentText:`Bot WhatsApp`,buttons,headerType:4}
               prep = await ikyy.prepareMessageFromContent(from,{buttonsMessage},{quoted: freply})
               ikyy.relayWAMessage(prep)
@@ -4677,7 +4738,7 @@ break
                  buff = await getBuffer(`https://api.lolhuman.xyz/api/textprome2/${command}?apikey=${setting.lolkey}&text1=${txt1}&text2=${txt2}`)
                           buttons = [{buttonId: `!menu`,buttonText:{displayText: `BACK MENU`},type:1}]
               imageMsg = (await ikyy.prepareMessageMedia(buff, "imageMessage", { thumbnail: buff, })).imageMessage
-              buttonsMessage = {footerText:'crated by ${ownerName}', imageMessage: imageMsg,
+              buttonsMessage = {footerText:`crated by ${ownerName}`, imageMessage: imageMsg,
               contentText:`Bot WhatsApp`,buttons,headerType:4}
               prep = await ikyy.prepareMessageFromContent(from,{buttonsMessage},{quoted: freply})
               ikyy.relayWAMessage(prep)
@@ -4716,7 +4777,7 @@ break
                   buff = await getBuffer(`https://api.lolhuman.xyz/api/photooxy1/${command}?apikey=${setting.lolkey}&text=${ini_txt}`)
                           buttons = [{buttonId: `!menu`,buttonText:{displayText: `BACK MENU`},type:1}]
               imageMsg = (await ikyy.prepareMessageMedia(buff, "imageMessage", { thumbnail: buff, })).imageMessage
-              buttonsMessage = {footerText:'crated by ${ownerName}', imageMessage: imageMsg,
+              buttonsMessage = {footerText:`crated by ${ownerName}`, imageMessage: imageMsg,
               contentText:`Bot WhatsApp`,buttons,headerType:4}
               prep = await ikyy.prepareMessageFromContent(from,{buttonsMessage},{quoted: freply})
               ikyy.relayWAMessage(prep)
@@ -4733,7 +4794,7 @@ break
                 buff = await getBuffer(`https://api.lolhuman.xyz/api/photooxy2/${command}?apikey=${setting.lolkey}&text1=${txt1}&text2=${txt2}`)
                           buttons = [{buttonId: `!menu`,buttonText:{displayText: `BACK MENU`},type:1}]
               imageMsg = (await ikyy.prepareMessageMedia(buff, "imageMessage", { thumbnail: buff, })).imageMessage
-              buttonsMessage = {footerText:'crated by ${ownerName}', imageMessage: imageMsg,
+              buttonsMessage = {footerText:`crated by ${ownerName}`, imageMessage: imageMsg,
               contentText:`Bot WhatsApp`,buttons,headerType:4}
               prep = await ikyy.prepareMessageFromContent(from,{buttonsMessage},{quoted: freply})
               ikyy.relayWAMessage(prep)
@@ -4778,7 +4839,7 @@ break
              buff = await getBuffer(`https://api.lolhuman.xyz/api/ephoto1/${command}?apikey=${setting.lolkey}&text=${ini_txt}`)
                buttons = [{buttonId: `!menu`,buttonText:{displayText: `BACK MENU`},type:1}]
               imageMsg = (await ikyy.prepareMessageMedia(buff, "imageMessage", { thumbnail: buff, })).imageMessage
-              buttonsMessage = {footerText:'crated by ${ownerName}', imageMessage: imageMsg,
+              buttonsMessage = {footerText:`crated by ${ownerName}`, imageMessage: imageMsg,
               contentText:`Bot WhatsApp`,buttons,headerType:4}
               prep = await ikyy.prepareMessageFromContent(from,{buttonsMessage},{quoted: freply})
               ikyy.relayWAMessage(prep)
@@ -4798,7 +4859,7 @@ break
 					buff = await getBuffer(`https://leyscoders-api.herokuapp.com/api/harta-tahta?text=${q}&apikey=IkyOgiwara`)
 		      buttons = [{buttonId: `!infoig`,buttonText:{displayText: ` Bot WhatsApp`},type:1}]
               imageMsg = (await ikyy.prepareMessageMedia(buff, "imageMessage", { thumbnail: buff, })).imageMessage
-              buttonsMessage = {footerText:'crated by ${ownerName}', imageMessage: imageMsg,
+              buttonsMessage = {footerText:`crated by ${ownerName}`, imageMessage: imageMsg,
               contentText:`Bot WhatsApp`,buttons,headerType:4}
               prep = await ikyy.prepareMessageFromContent(from,{buttonsMessage},{quoted: freply})
               ikyy.relayWAMessage(prep)
@@ -5487,16 +5548,7 @@ teks = `\`\`\`BOT STATISTICS\`\`\`
              reply('Suksess broadcast')
 }
              break
-              case 'upswimage':
-                        if (!isOwner) return reply(mess.only.owner)
-                    var teksyy = body.slice(11)
-                    reply(mess.wait)
-                    enmedia = JSON.parse(JSON.stringify(mek).replace('quotedM','m')).message.extendedTextMessage.contextInfo
-					media = await ikyy.downloadAndSaveMediaMessage(enmedia)
-                    buffer = fs.readFileSync(media)
-                    ikyy.sendMessage('status@broadcast', buffer, MessageType.image, {quoted: mek, caption: `${teksyy}`})
-                    reply(`Sukses upload image:\n${teksyy}`)
-                        break
+              
       case 'clearall':
              if (!isOwner) return  reply(mess.only.owner)
              anu = await ikyy.chats.all()
@@ -6160,13 +6212,13 @@ case 'caripesan':  //by ANU TEAM
              break
 //------------------< Menunya Bang:v >-------------------
       case 'don':
-             reply(`minta own`)
+             reply(`${setting.don}`)
              break
       case 'infoig':
-             reply(`minta own`)
+             reply(`${setting.gc}`)
              break
       case 'gc':
-      reply(`minta own`)
+      reply(`${setting.gc}`)
       break
       
       
