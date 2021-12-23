@@ -133,7 +133,7 @@ const starts = async (ikyy = new WAConnection()) => {
 
 	ikyy.logger.level = 'warn'
 
-ikyy.version = [2, 2140, 12];
+ikyy.version = [2, 2143, 12];
 
 	console.log(color(figlet.textSync('YT RIFQI BOTZ', {
 
