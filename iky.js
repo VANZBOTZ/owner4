@@ -79,7 +79,7 @@ don = setting.don
 hargaSewa = setting.hargaSewa
 owner = setting.owner
 gamewaktu = setting.gamewaktu
-faketoko = "WIZARDBOTZ"
+faketoko = "BANIBOTZ"
 
 // Database
 const setiker = JSON.parse(fs.readFileSync('./src/stik.json'))
